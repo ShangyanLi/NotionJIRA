@@ -15,7 +15,7 @@ if token is None or db_id is None:
     exit(1)
 
 base_url = 'https://api.notion.com/v1'
-headers = {'Authorization': f'Bearer {token}', 'Notion-Version': '2021-05-13'}
+headers = {'Authorization': f'Bearer {token}', 'Notion-Version': '2021-08-16'}
 retry_strategy = Retry(
     total=10,
     status_forcelist=[429],
@@ -114,7 +114,7 @@ def update_ticket_ids(tickets: [str], latest_id: int) -> None:
         ticket_id += 1
         r = s.patch(f'{base_url}/pages/{page_id}', json={
             'properties': {
-                'Ticket ID': ticket_id
+                id_prop: ticket_id
             }
         })
         if r.status_code != 200:
